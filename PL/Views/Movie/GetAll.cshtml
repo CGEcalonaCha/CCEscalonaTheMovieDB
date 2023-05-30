@@ -1,0 +1,90 @@
+﻿@model ML.Movie
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <section>
+        <div class="row">
+            <div class="=col-md-12">
+                <h1 style="text-align:center; color:brown; font-family:Elephant">THE MOVIE BD </h1>
+            </div>
+        </div>
+    </section>
+    <section>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h5 style="color:hotpink; font-family:'Bodoni MT'">SELECCIONE BUSCAR PARA UNA BÚSQUEDA RÁPIDA NOMBRE DRINK </h5>
+            </div>
+        </div>
+        @*</section>
+        <div class="row">
+        <div class="col-md-12">
+        @using (Html.BeginForm("GetstrDrink", "Cocteles", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+        <div class="row">
+
+        <div class="col-md-3">
+        @Html.TextBoxFor(model => model.strDrink, new { @class = "form-control", @id = "txtNombre", @placeholder = "Ej. margarita"})
+
+        @Html.ValidationMessageFor(model => model.strDrink)
+
+        </div>
+        </div>
+        <div class="row">
+        <div class="col">
+        <input type="submit" value="Buscar" class="btn btn-info" />
+
+        </div>
+        </div>
+
+        }
+
+
+        </div>
+        </div>
+        <section>*@
+
+
+        <div class="row">
+            @foreach (ML.Movie movi in Model.Movies)
+            {
+
+                <div style=" width: 20rem;">
+                    <div class="card text-center">
+                        @if (movi.path == null || movi.path == " ")
+                        {
+
+                            <img src="/image/Usuario.jpg" class="card-img-top" style="height:350px;">
+                        }
+                        else
+                        {
+                            <img src="@movi.path@movi.poster_path" class="card-img-top" style="height:350px;">
+                        }
+
+                        <div class="card-body" style="height:250px;">
+                            <h5 class="card-title">@movi.original_title </h5>
+                            <p class="card-text">
+                                Clasificacion  +18: @movi.adult <br />
+                                Lenguaje Original: @movi.original_language <br />
+                                Titulo: @movi.title
+                            </p>
+
+
+                           
+
+                        </div>
+                    </div>
+                    <br />
+
+                    <br />
+                </div>
+            }
+        </div>
+
+
+    </section>
+
+</div>
