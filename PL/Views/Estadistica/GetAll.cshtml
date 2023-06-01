@@ -1,0 +1,50 @@
+﻿@model ML.Cine
+<!DOCTYPE HTML>
+<html>
+<head>
+	
+</head>
+<body>
+	<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+	
+</body>
+</html>
+
+@section Scripts {
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://cdn.canvasjs.com/jquery.canvasjs.min.js"></script> 
+
+
+<script type="text/javascript">
+	window.onload = function () {
+
+		var options = {
+			title: {
+				text: "Grafica de Ventas Cines"
+			},
+			subtitles: [{
+				text: "Año 2023"
+			}],
+			animationEnabled: true,
+			data: [{
+				type: "pie",
+				startAngle: 40,
+				toolTipContent: "<b>{label}</b>: {y}%",
+				showInLegend: "true",
+				legendText: "{label}",
+				indexLabelFontSize: 16,
+				indexLabel: "{label} - {y}%",
+				dataPoints: [
+						{ y: 25.00, label: "Oriente" },
+						{ y: 25.00, label: "Poniente" },
+						{ y: 25.00, label: "Sur" },
+						{ y: 25.00, label: "Norte" }
+				]
+			}]
+		};
+		$("#chartContainer").CanvasJSChart(options);
+
+	}
+</script>
+
+				}
