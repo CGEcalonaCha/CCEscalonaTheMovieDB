@@ -1,27 +1,22 @@
 ﻿@model ML.Cine
-@{
-    ViewData["Title"] = "GetGraphs";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-<h1>GetGraphs</h1>
-
 <!DOCTYPE HTML>
 <html>
 <head>
 	
 </head>
 <body>
-	<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-	
+	<div id="chartContainer" style="height: 370px; width:  50%;"></div>
+    <div id="map" style="height: 400px; width: 50%;"></div>
 </body>
 </html>
 
-@*@section Scripts {
-
-}*@
+@section Scripts {
 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script src="https://cdn.canvasjs.com/jquery.canvasjs.min.js"></script>
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSKBDdPPlfca_zTwyxKiicRQn1qfgRjLw&libraries=places
+"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js
+"></script>
 
 <script type="text/javascript">
 	window.onload = function () {
@@ -43,10 +38,10 @@
 				indexLabelFontSize: 16,
 				indexLabel: "{label} - {y}%",
 				dataPoints: [
-					{ y: 25.00, label: "Oriente },
-					{ y: 25.00, label: "Poniente" },
-					{ y: 25.00, label: "Sur" },
-					{ y: 25.00, label: "Norte" },
+						{ y: 25.00, label: "Oriente" },
+						{ y: 25.00, label: "Poniente" },
+						{ y: 25.00, label: "Sur" },
+						{ y: 25.00, label: "Norte" }
 				]
 			}]
 		};
@@ -54,3 +49,92 @@
 
 	}
 </script>
+<script>
+        //google.maps.event.addListener(map, "clicMapak", (event) => {
+        //    addMarker(event.latLng, map);
+        //});
+        //// Add a marker at the center of the map.
+        //addMarker(bangalore, map);
+    var Http = new XMLHttpRequest();
+    var vMarker
+    var map
+    map = new google.maps.Map(document.getElementById('Mapa'), {
+        zoom: 14,
+        center: new google.maps.LatLng(19.4326296, -99.1331785),
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    vMarker = new google.maps.Marker({
+        position: new google.maps.LatLng(19.4326296, -99.1331785),
+        draggable: true
+    });
+    google.maps.event.addListener(vMarker, 'dragend', function (evt) {
+        $("#txtLat").val(evt.latLng.lat().toFixed(6));
+        $("#txtLng").val(evt.latLng.lng().toFixed(6));
+        map.panTo(evt.latLng);
+        var latitud = evt.latLng.lat().toFixed(6);
+        var longitud = evt.latLng.lng().toFixed(6);
+        var Direction = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitud + ',' + longitud
+            + '&key=AIzaSyCSKBDdPPlfca_zTwyxKiicRQn1qfgRjLw';
+        $.ajax({
+            type: 'GET',
+            url: Direction,
+            dataType: 'json',
+            success: function (result) {
+                var array = result.results;
+                $("#txtDireccion").val(array[0].formatted_address);
+            },
+            error: function (ex) {
+                alert('Failed' + ex);
+            }
+
+        });
+            
+
+
+
+    });
+    map.setCenter(vMarker.position);
+    vMarker.setMap(map);
+</script>
+
+    <script>
+        // Función para inicializar el mapa y agregar un evento de clic en el mapa
+        function initializeMap() {
+            var mapOptions = {
+                center: new google.maps.LatLng(19.435790, -99.139922),
+                zoom: 12,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            google.maps.event.addListener(map, 'click', function (event) {
+                getAddress(event.latLng.lat(), event.latLng.lng());
+            });
+        }
+
+        // Función para obtener la dirección utilizando las coordenadas latitud y longitud
+        function getAddress(lat, lng) {
+            var geocoder = new google.maps.Geocoder();
+            var latLng = new google.maps.LatLng(lat, lng);
+
+            geocoder.geocode({ 'latLng': latLng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    if (results[0]) {
+                        $('#address').val(results[0].formatted_address);
+                        $("#txtLatitud").val(lat);
+                        $("#txtLongitud").val(lng);
+
+                    }
+                } else {
+                    alert('No se pudo obtener la dirección. Por favor, intenta de nuevo.');
+                }
+            });
+        }
+
+        // Inicializar el mapa cuando la página haya cargado
+        google.maps.event.addDomListener(window, 'load', initializeMap);
+
+
+    </script>
+
+				}
