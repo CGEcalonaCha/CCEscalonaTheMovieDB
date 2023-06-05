@@ -103,6 +103,69 @@ namespace PL.Controllers
         {
             return View();
         }
+        //[HttpGet]
+        //public ActionResult GetAllVentas()
+        //{
+        //    ML.Cine cineVentas = new ML.Cine();
+        //    ML.Cine cineVentasZones = new ML.Cine();
+        //    cineVentasZones.Ventas = new ML.Venta();
+        //    cineVentas.Cines = new List<object>();
+        //    decimal ventaTotal = 0;
+        //    decimal ventaNorte = 0;
+        //    decimal ventaSur = 0;
+        //    decimal ventaEste = 0;
+        //    decimal ventaOeste = 0;
+        //    ML.Result resultCines = BL.Cine.GetAll();
+        //    if (resultCines.Correct)
+        //    {
+        //        cineVentas.Cines = resultCines.Objects;
+        //        foreach (ML.Cine cine in cineVentas.Cines)
+        //        {
+
+        //            ventaTotal = (ventaTotal + cine.Ventas);
+        //        }
+
+        //        foreach (ML.Cine cineVentaZona in cineVentas.Cines)
+        //        {
+        //            if (cineVentaZona.Zona.IdZona == 1)
+        //            {
+        //                ventaNorte = (ventaNorte + cineVentaZona.Ventas);
+        //                //cineVentasZones.VentasTotaless.VentasNorte = ventaNorte;
+        //            }
+        //            else
+        //            {
+        //                if (cineVentaZona.Zona.IdZona == 2)
+        //                {
+        //                    ventaSur = (ventaSur + cineVentaZona.Ventas);
+
+        //                }
+        //                else
+        //                {
+        //                    if (cineVentaZona.Zona.IdZona == 3)
+        //                    {
+        //                        ventaEste = (ventaEste + cineVentaZona.Ventas);
+
+        //                    }
+        //                    else
+        //                    {
+        //                        ventaOeste = (ventaOeste + cineVentaZona.Ventas);
+
+        //                    }
+        //                }
+        //            }
+
+
+        //        }
+        //        cineVentasZones.Ventas.VentasNorte = ((ventaNorte / ventaTotal) * 100);
+        //        cineVentasZones.Ventas.VentasSur = ((ventaSur / ventaTotal) * 100);
+        //        cineVentasZones.Ventas.VentasEste = ((ventaEste / ventaTotal) * 100);
+        //        cineVentasZones.Ventas.VentasOeste = ((ventaOeste / ventaTotal) * 100);
+
+
+
+        //    }
+        //    return View(cineVentasZones);
+        //}
     }
 
 }
