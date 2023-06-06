@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="col">
-                    @Html.LabelFor(model => model.Zona)
+                    @Html.LabelFor(model => model.Zona )
                     @Html.DropDownListFor(model => model.Zona.IdZona, new SelectList(Model.Zona.Zonas, "IdZona", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
 
                     @Html.ValidationMessageFor(model => model.Zona.IdZona)

@@ -9,12 +9,10 @@ namespace ML
     public class Venta
     {
         public decimal VentasTotales { get; set; }
-
-        public decimal VentasNorte = 0;
+        public decimal VentasNorte  =0;
         public decimal VentasSur { get; set; }
         public decimal VentasEste { get; set; }
         public decimal VentasOeste { get; set; }
-
         public List<object> Ventas { get; set; }
 
     }

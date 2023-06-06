@@ -16,5 +16,6 @@ namespace ML
         public int longitud { get; set; }
         public List<object> Cines { get; set; }
         public ML.Zona Zona { get; set; }
+        public ML.Venta Ventass { get; set; }
     }
 }
