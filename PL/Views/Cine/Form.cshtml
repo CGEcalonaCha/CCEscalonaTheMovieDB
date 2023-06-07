@@ -63,10 +63,10 @@
                 </div>
 
                 <div class="col">
-                    @Html.LabelFor(model => model.Zona )
+                        @Html.LabelFor(model => model.Zona, new { @class = "control-label" } )
                     @Html.DropDownListFor(model => model.Zona.IdZona, new SelectList(Model.Zona.Zonas, "IdZona", "Nombre"), "Selecciona una opción", new { @class = "form-control" })
 
-                    @Html.ValidationMessageFor(model => model.Zona.IdZona)
+                    @Html.ValidationMessageFor(model => model.Zona.IdZona,  null, new { @class = "text-danger" })
                 </div>
 
                 <div class="col">
@@ -78,15 +78,14 @@
                 </div>
                     <div class="col">
                         @Html.LabelFor(model => model.latitud)
-
-                        @Html.TextBoxFor(model => model.latitud, new { @class = "form-control", @id = "txtLatitud", @name ="Direccion", @readonly = true })
+                        @Html.TextBoxFor(model => model.latitud, new { @class = "form-control", @id = "txtLatitud", @readonly = true })
 
                         @Html.ValidationMessageFor(model => model.latitud)
                     </div>
                     <div class="col">
                         @Html.LabelFor(model => model.longitud)
 
-                        @Html.TextBoxFor(model => model.longitud, new { @class = "form-control", @id = "txtLongitud", @name ="longitud", @readonly = true })
+                        @Html.TextBoxFor(model => model.longitud, new  { @class = "form-control", @id = "txtLatitud", @name ="Direccion", @readonly = true })
 
                         @Html.ValidationMessageFor(model => model.longitud)
                     </div>

@@ -99,56 +99,56 @@ namespace PL.Controllers
             }
             return View("Modal");
         }
-        public IActionResult GetGraphs()
-        {
-            return View();
-        }
+        //public IActionResult GetGraphs()
+        //{
+        //    return View();
+        //}
         [HttpGet]
-        public ActionResult GetAllVentas()
+        public ActionResult GetGraphs(ML.Cine cineEstadisticas)
         {
-            ML.Cine cineVentas = new ML.Cine();
-            ML.Cine cineVentasZones = new ML.Cine();
-            cineVentasZones.Ventass = new ML.Venta();
-            cineVentas.Cines = new List<object>();
-            decimal ventaTotal = 0;
-            decimal ventaNorte = 0;
-            decimal ventaSur = 0;
-            decimal ventaEste = 0;
-            decimal ventaOeste = 0;
+            //ML.Cine cineVentas = new ML.Cine();
+            ML.Cine Estadisticas = new ML.Cine();
+            Estadisticas.EstadisticaCine = new ML.Estadistica();
+            cineEstadisticas.Cines = new List<object>();
+            decimal total = 0;
+            decimal sur = 0;
+            decimal oriente = 0;
+            decimal poniente = 0;
+            decimal norte = 0;
             ML.Result resultCines = BL.Cine.GetAll();
             if (resultCines.Correct)
             {
-                cineVentas.Cines = resultCines.Objects;
-                foreach (ML.Cine cine in cineVentas.Cines)
+                cineEstadisticas.Cines = resultCines.Objects;
+                foreach (ML.Cine cine in cineEstadisticas.Cines)
                 {
 
-                    ventaTotal = (ventaTotal + cine.Ventas);
+                    total = (total + cine.Ventas);
                 }
-
-                foreach (ML.Cine cineVentaZona in cineVentas.Cines)
+                cineEstadisticas.Cines = resultCines.Objects;
+                foreach (ML.Cine Zona in cineEstadisticas.Cines)
                 {
-                    if (cineVentaZona.Zona.IdZona == 1)
+                    if (Zona.Zona.IdZona == 1)
                     {
-                        ventaNorte = (ventaNorte + cineVentaZona.Ventas);
+                        sur = (sur + Zona.Ventas);
                         //cineVentasZones.VentasTotaless.VentasNorte = ventaNorte;
                     }
                     else
                     {
-                        if (cineVentaZona.Zona.IdZona == 2)
+                        if (Zona.Zona.IdZona == 2)
                         {
-                            ventaSur = (ventaSur + cineVentaZona.Ventas);
+                            oriente = (oriente + Zona.Ventas);
 
                         }
                         else
                         {
-                            if (cineVentaZona.Zona.IdZona == 3)
+                            if (Zona.Zona.IdZona == 3)
                             {
-                                ventaEste = (ventaEste + cineVentaZona.Ventas);
+                                poniente = (poniente + Zona.Ventas);
 
                             }
                             else
                             {
-                                ventaOeste = (ventaOeste + cineVentaZona.Ventas);
+                                norte = (norte + Zona.Ventas);
 
                             }
                         }
@@ -156,15 +156,15 @@ namespace PL.Controllers
 
 
                 }
-                cineVentasZones.Ventass.VentasNorte = ((ventaNorte / ventaTotal) * 100);
-                cineVentasZones.Ventass.VentasSur = ((ventaSur / ventaTotal) * 100);
-                cineVentasZones.Ventass.VentasEste = ((ventaEste / ventaTotal) * 100);
-                cineVentasZones.Ventass.VentasOeste = ((ventaOeste / ventaTotal) * 100);
+                Estadisticas.EstadisticaCine.Sur = ((sur / total) * 100);
+                Estadisticas.EstadisticaCine.Norte = ((oriente / total) * 100);
+                Estadisticas.EstadisticaCine.Poniete = ((poniente / total) * 100);
+                Estadisticas.EstadisticaCine.Oriente = ((norte / total) * 100);
 
 
 
             }
-            return View(cineVentasZones);
+            return View(Estadisticas);
         }
     }
 
