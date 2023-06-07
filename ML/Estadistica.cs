@@ -9,7 +9,7 @@ namespace ML
     public class Estadistica
     {
         public decimal Total { get; set; }
-        public decimal Sur = 0;
+        public decimal Sur { get; set; }
         public decimal Oriente { get; set; }
         public decimal Poniete { get; set; }
         public decimal Norte { get; set; }

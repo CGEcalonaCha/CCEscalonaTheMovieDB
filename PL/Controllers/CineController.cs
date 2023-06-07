@@ -32,6 +32,8 @@ namespace PL.Controllers
             cine.Zona = new ML.Zona();
             cine.Zona.Zonas = new List<object>();
             result = BL.Zona.GetAll();
+            cine.Zona = new ML.Zona();
+            cine.Zona.Zonas = result.Objects;
             if (result.Correct)
             {
 
@@ -110,6 +112,7 @@ namespace PL.Controllers
             ML.Cine Estadisticas = new ML.Cine();
             Estadisticas.EstadisticaCine = new ML.Estadistica();
             cineEstadisticas.Cines = new List<object>();
+            cineEstadisticas.Cines = new List<object>();
             decimal total = 0;
             decimal sur = 0;
             decimal oriente = 0;
@@ -124,13 +127,11 @@ namespace PL.Controllers
 
                     total = (total + cine.Ventas);
                 }
-                cineEstadisticas.Cines = resultCines.Objects;
                 foreach (ML.Cine Zona in cineEstadisticas.Cines)
                 {
                     if (Zona.Zona.IdZona == 1)
                     {
                         sur = (sur + Zona.Ventas);
-                        //cineVentasZones.VentasTotaless.VentasNorte = ventaNorte;
                     }
                     else
                     {

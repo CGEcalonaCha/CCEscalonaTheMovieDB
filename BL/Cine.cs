@@ -118,9 +118,10 @@ namespace BL
                                 cine.Direccion = obj.Direccion;
                                 cine.Ventas = obj.Venta.Value;
 
-                                ML.Zona zona = new ML.Zona();
-                                zona.IdZona = obj.IdZona.Value;
-                                zona.Nombre = obj.NombreZona;
+
+                                 cine.Zona = new ML.Zona();
+                                 cine.Zona.IdZona = obj.IdZona.Value;
+                                cine.Zona.Nombre = obj.NombreZona;
 
 
 
@@ -161,15 +162,14 @@ namespace BL
                             cine.Complejo = RowsAfected.Complejo;
                             cine.Direccion = RowsAfected.Direccion;
                             cine.Ventas = RowsAfected.Venta.Value;
+                            cine.Zona = new ML.Zona();
+                            cine.Zona.IdZona = RowsAfected.IdZona.Value;
+                            cine.Zona.Nombre = RowsAfected.NombreZona;
 
-                            ML.Zona zona = new ML.Zona();
-                            zona.IdZona = RowsAfected.IdZona.Value;
-                            zona.Nombre = RowsAfected.NombreZona;
+                        result.Object = cine; //boxing
 
-                            result.Object = cine;
-
-                            result.Correct = true;
-                        }
+                        result.Correct = true;
+                    }
                         else
                         {
                             result.Correct = false;
