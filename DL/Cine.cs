@@ -21,6 +21,4 @@ public partial class Cine
 
     public virtual Zona? IdZonaNavigation { get; set; }
     public string? NombreZona { get; set; }
-
-
 }

@@ -50,9 +50,13 @@ public partial class CescalonaCineContext : DbContext
 
         modelBuilder.Entity<Usuario>(entity =>
         {
-            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__5B65BF97067168A4");
+            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__5B65BF9790ADBB22");
 
             entity.ToTable("Usuario");
+
+            entity.HasIndex(e => e.Email, "UQ__Usuario__A9D10534AD0393DE").IsUnique();
+
+            entity.HasIndex(e => e.UserName, "UQ__Usuario__C9F28456797B7E15").IsUnique();
 
             entity.Property(e => e.ApellidoMaterno)
                 .HasMaxLength(50)
@@ -60,13 +64,13 @@ public partial class CescalonaCineContext : DbContext
             entity.Property(e => e.ApellidoPaterno)
                 .HasMaxLength(50)
                 .IsUnicode(false);
+            entity.Property(e => e.Contrasena).HasMaxLength(20);
             entity.Property(e => e.Email)
                 .HasMaxLength(254)
                 .IsUnicode(false);
             entity.Property(e => e.Nombre)
                 .HasMaxLength(50)
                 .IsUnicode(false);
-            entity.Property(e => e.PassWord).HasMaxLength(20);
             entity.Property(e => e.UserName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
