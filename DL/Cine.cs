@@ -15,6 +15,12 @@ public partial class Cine
 
     public int? IdZona { get; set; }
 
+    public decimal? Latitud { get; set; }
+
+    public decimal? Longitud { get; set; }
+
     public virtual Zona? IdZonaNavigation { get; set; }
-    public string NombreZona { get; set; }
+    public string? NombreZona { get; set; }
+
+
 }

@@ -17,6 +17,8 @@ public partial class CescalonaCineContext : DbContext
 
     public virtual DbSet<Cine> Cines { get; set; }
 
+    public virtual DbSet<Usuario> Usuarios { get; set; }
+
     public virtual DbSet<Zona> Zonas { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -37,11 +39,37 @@ public partial class CescalonaCineContext : DbContext
             entity.Property(e => e.Direccion)
                 .HasMaxLength(150)
                 .IsUnicode(false);
+            entity.Property(e => e.Latitud).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.Longitud).HasColumnType("decimal(18, 0)");
             entity.Property(e => e.Venta).HasColumnType("decimal(18, 0)");
 
             entity.HasOne(d => d.IdZonaNavigation).WithMany(p => p.Cines)
                 .HasForeignKey(d => d.IdZona)
                 .HasConstraintName("FK__Cine__IdZona__1273C1CD");
+        });
+
+        modelBuilder.Entity<Usuario>(entity =>
+        {
+            entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__5B65BF97067168A4");
+
+            entity.ToTable("Usuario");
+
+            entity.Property(e => e.ApellidoMaterno)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.ApellidoPaterno)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.Email)
+                .HasMaxLength(254)
+                .IsUnicode(false);
+            entity.Property(e => e.Nombre)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+            entity.Property(e => e.PassWord).HasMaxLength(20);
+            entity.Property(e => e.UserName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
         });
 
         modelBuilder.Entity<Zona>(entity =>
