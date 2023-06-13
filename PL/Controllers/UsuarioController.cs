@@ -2,6 +2,8 @@
 using System.Net.Mail;
 using System.Security.Cryptography;
 
+
+
 namespace PL.Controllers
 {
     public class UsuarioController : Controller
@@ -30,11 +32,13 @@ namespace PL.Controllers
             else
             {
                 // Proceso de login
+                // Proceso de login
                 ML.Result result = BL.Usuario.GetByEmail(usuario.Email);
                 usuario = (ML.Usuario)result.Object;
 
                 if (usuario.Password.SequenceEqual(passwordHash))
                 {
+
                     return RedirectToAction("Index", "Home");
                 }
             }
@@ -52,17 +56,17 @@ namespace PL.Controllers
 
             //validar que exista el email en la bd
 
-            string emailOrigen = "leoebravo@gmail.com";
+            string emailOrigen = "cescalonacha@gmail.com";
 
             MailMessage mailMessage = new MailMessage(emailOrigen, email, "Recuperar Contraseña", "<p>Correo para recuperar contraseña</p>");
             mailMessage.IsBodyHtml = true;
-            string contenidoHTML = System.IO.File.ReadAllText(@"C:\users\digis\Documents\IISExpress\Leonardo Escogido Bravo\Proyecto2023Ecommerce\PL\Views\Usuario\Email.html");
+            string contenidoHTML = System.IO.File.ReadAllText(@"C:\Users\digis\OneDrive\Documents\ESCALONA CHAVARRIA CECILIA GABRIELA\Repositorio\CGEscalonaCha\CCEscalonaTheMovieDB\PL\PL\Views\Usuario\Email.html");
             mailMessage.Body = contenidoHTML;
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
             smtpClient.EnableSsl = true;
             smtpClient.UseDefaultCredentials = false;
             smtpClient.Port = 587;
-            smtpClient.Credentials = new System.Net.NetworkCredential(emailOrigen, "kuwzpcgwbrmueviw");
+            smtpClient.Credentials = new System.Net.NetworkCredential(emailOrigen, "ratgrwdndsvbtqnp");
 
             smtpClient.Send(mailMessage);
             smtpClient.Dispose();
@@ -81,5 +85,6 @@ namespace PL.Controllers
         {
             return View();
         }
+
     }
 }
