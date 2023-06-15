@@ -1,6 +1,5 @@
-﻿@model ML.Usuario
+﻿﻿@model ML.Usuario
 @{
-    ViewData["Title"] = "Bienvenido";
     Layout = null;
 }
 
@@ -16,14 +15,14 @@
         <input type="checkbox" id="chk" aria-hidden="true">
 
         <div class="signup">
-            @using (Html.BeginForm("Login", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Login", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <label for="chk" aria-hidden="true">Registrarse</label>
-                <input type="text" name="Nombre" placeholder="name" required="">
                 <input type="text" name="UserName" placeholder="User name" required="">
-                <input type="email" name="Email" placeholder="Email" required="">
+                <input type="text" name="Nombre" placeholder="Nombre" required="">
+                <input type="text" name="ApellidoPaterno" placeholder="Apellido Paterno" required="">         
+                <input type="email" name="Correo" placeholder="Email" required="">
                 <input type="password" name="password" placeholder="Password" required="">
-
                 <button type="submit">Registrarse</button>
             }
         </div>
@@ -31,13 +30,13 @@
         <br>
 
         <div class="login">
-            @using (Html.BeginForm("Login", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Login", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {
                 <label for="chk" aria-hidden="true">Login</label>
-                <input type="email" name="Email" placeholder="Email" required="">
+                <input type="email" name="Correo" placeholder="Email" required="">
                 <input type="password" name="password" placeholder="Password" required="">
                 <button type="submit">Login</button>
-                <a style="text-align: center;  display: flex; justify-content: center;" href="/Usuario/CambiarPassword">Olvide mi contraseña</a>
+                <a style="text-align: center;  display: flex; justify-content: center;" href="/User/CambiarPassword">Olvide mi contraseña</a>
             }
 
         </div>

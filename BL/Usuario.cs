@@ -121,5 +121,66 @@ namespace BL
             }
             return result;
         }
+        public static ML.Result GetById(int idUsuario)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.CescalonaCineContext context = new DL.CescalonaCineContext())
+                {
+                    var obj = context.Usuarios.FromSqlRaw($"UsuarioGetById '{idUsuario}' ").AsEnumerable().FirstOrDefault();
+
+                    if (obj != null)
+                    {
+                        ML.Usuario usuario = new ML.Usuario();
+                        usuario.IdUsuario = obj.IdUsuario;
+                        usuario.UserName = obj.UserName;
+                        usuario.Nombre = obj.Nombre;
+                        usuario.ApellidoPaterno = obj.ApellidoPaterno;
+                        usuario.ApellidoMaterno = obj.ApellidoMaterno;
+                        usuario.Email = obj.Email;
+                        usuario.Password = obj.Contrasena;
+                        result.Object = usuario;
+                        result.Correct = true;
+                    }
+                    else
+                    {
+                        result.Correct = false;
+                        result.ErrorMessage = "No se pudo realizar la consulta";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = ex.Message;
+                result.Ex = ex;
+            }
+            return result;
+        }
+        public static ML.Result UpdatePassword(ML.Usuario usuario)
+        {
+            ML.Result result = new ML.Result();
+            try
+            {
+                using (DL.CescalonaCineContext context = new DL.CescalonaCineContext())
+                {
+                    int queryEF = context.Database.ExecuteSqlRaw($"EmailUpdatePassword  '{usuario.Email}',  @Contraseña", new SqlParameter("@Contraseña", usuario.Email));
+                    if (queryEF > 0)
+                    {
+                        result.Correct = true;
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                result.Correct = false;
+                result.ErrorMessage = "Ocurrio un error al actualizar la contraseña" + ex;
+            }
+            return result;
+        }
     }
 }
