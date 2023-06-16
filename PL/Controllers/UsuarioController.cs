@@ -73,7 +73,7 @@ namespace PL.Controllers
 
             ViewBag.Modal = "show";
             ViewBag.Mensaje = "Se ha enviado un correo de confirmación a tu correo electronico";
-            return View();
+            return RedirectToAction("NewPassword", "Usuario");
         }
         [HttpGet]
         public ActionResult NewPassword(string email)

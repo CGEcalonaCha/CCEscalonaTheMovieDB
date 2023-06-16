@@ -166,7 +166,7 @@ namespace BL
             {
                 using (DL.CescalonaCineContext context = new DL.CescalonaCineContext())
                 {
-                    int queryEF = context.Database.ExecuteSqlRaw($"EmailUpdatePassword  '{usuario.Email}',  @Contraseña", new SqlParameter("@Contraseña", usuario.Email));
+                    int queryEF = context.Database.ExecuteSqlRaw($"UsuarioUpdate  '{usuario.Email}',  @Contraseña", new SqlParameter("@Contraseña", usuario.Password));
                     if (queryEF > 0)
                     {
                         result.Correct = true;
