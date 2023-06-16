@@ -159,28 +159,53 @@ namespace BL
             }
             return result;
         }
-        public static ML.Result UpdatePassword(ML.Usuario usuario)
+        //public static ML.Result UpdatePassword(ML.Usuario usuario)
+        //{
+        //    ML.Result result = new ML.Result();
+        //    try
+        //    {
+        //        using (DL.CescalonaCineContext context = new DL.CescalonaCineContext())
+        //        {
+        //            int queryEF = context.Database.ExecuteSqlRaw($"UsuarioUpdate  '{usuario.Email}',  @Contrasena", new SqlParameter("@Contrasena", usuario.Password));
+        //            if (queryEF > 0)
+        //            {
+        //                result.Correct = true;
+        //            }
+
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        result.Correct = false;
+        //        result.ErrorMessage = "Ocurrio un error al actualizar la contraseña" + ex;
+        //    }
+        //    return result;
+        //}
+        public static  ML.Result Update(ML.Usuario usu)
         {
             ML.Result result = new ML.Result();
             try
             {
-                using (DL.CescalonaCineContext context = new DL.CescalonaCineContext())
+                using(DL.CescalonaCineContext context = new DL.CescalonaCineContext())
                 {
-                    int queryEF = context.Database.ExecuteSqlRaw($"UsuarioUpdate  '{usuario.Email}',  @Contraseña", new SqlParameter("@Contraseña", usuario.Password));
-                    if (queryEF > 0)
+                    var query = context.Database.ExecuteSqlRaw($"UpdatePassword '{usu.Email}',  @Password", new SqlParameter("@Password", usu.Password));
+                    if(query != 0)
                     {
                         result.Correct = true;
                     }
+                    else
+                    {
 
-                }
-
+                    }
+                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 result.Correct = false;
                 result.ErrorMessage = "Ocurrio un error al actualizar la contraseña" + ex;
             }
-            return result;
+            return  result;
         }
     }
 }

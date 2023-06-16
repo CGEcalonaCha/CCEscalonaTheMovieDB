@@ -10,6 +10,7 @@ public partial class Cine
     public string? Complejo { get; set; }
 
     public string? Direccion { get; set; }
+    public string? NombreZona { get; set; }
 
     public decimal? Venta { get; set; }
 
@@ -20,5 +21,4 @@ public partial class Cine
     public decimal? Longitud { get; set; }
 
     public virtual Zona? IdZonaNavigation { get; set; }
-    public string? NombreZona { get; set; }
 }
