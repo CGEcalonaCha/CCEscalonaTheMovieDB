@@ -203,7 +203,7 @@ namespace BL
             catch(Exception ex)
             {
                 result.Correct = false;
-                result.ErrorMessage = "Ocurrio un error al actualizar la contraseña" + ex;
+                result.ErrorMessage = "Ocurrio un error al actualizar la contraseña   " + ex;
             }
             return  result;
         }
